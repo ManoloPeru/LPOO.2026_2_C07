@@ -45,6 +45,8 @@ namespace SGPlantaReciclajeController {
         // ExisteEstacion: verifica si existe una estación con el Serial ID dado.
         bool ExisteEstacion(String^ serialId);
 
+        void LibreraMemoria();
+
         // InsertarEstacionesIniciales: inserta 3 estaciones de ejemplo.
         void InsertarEstacionesIniciales();
 

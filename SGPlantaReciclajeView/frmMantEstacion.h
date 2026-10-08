@@ -330,7 +330,7 @@ namespace SGPlantaReciclajeView {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveCaption;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
-			this->ClientSize = System::Drawing::Size(1133, 602);
+			this->ClientSize = System::Drawing::Size(1083, 602);
 			this->Controls->Add(this->btnEliminar);
 			this->Controls->Add(this->btnEditar);
 			this->Controls->Add(this->btnNuevo);
@@ -341,6 +341,7 @@ namespace SGPlantaReciclajeView {
 			this->Margin = System::Windows::Forms::Padding(6);
 			this->Name = L"frmMantEstacion";
 			this->Text = L"Mantenimiento de Estaciones";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &frmMantEstacion::frmMantEstacion_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &frmMantEstacion::frmMantEstacion_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLista))->EndInit();
 			this->groupBox1->ResumeLayout(false);
@@ -525,6 +526,19 @@ namespace SGPlantaReciclajeView {
 		{
 			MessageBox::Show("Por favor, seleccione un operador para eliminar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 		}
+	}
+	
+	private: System::Void frmMantEstacion_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+		// Este evento se dispara cuando el formulario se está cerrando
+		// Puedes realizar acciones de limpieza aquí
+		// Ejemplo: Guardar configuración, liberar recursos, etc.
+		// MessageBox::Show("El formulario se está cerrando", "Cerrando");
+		this->estacionController->LibreraMemoria();
+		// Opcional: Puedes cancelar el cierre si es necesario
+		// if (condicion) {
+		//     e->Cancel = true;
+		//     MessageBox::Show("El cierre fue cancelado");
+		//
 	}
 };
 }

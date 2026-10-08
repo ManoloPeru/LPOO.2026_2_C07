@@ -80,6 +80,10 @@ namespace SGPlantaReciclajeController {
         return ConsultarEstacion(serialId) != nullptr;
     }
 
+    void EstacionController::LibreraMemoria() {
+        this->repositorio = nullptr;
+    }
+
     // InsertarEstacionesIniciales: inserta 3 estaciones de ejemplo.
     void EstacionController::InsertarEstacionesIniciales() {
         Console::WriteLine();
