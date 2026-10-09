@@ -1,4 +1,5 @@
 #pragma once
+#include "ComboHelper.h"
 
 namespace SGPlantaReciclajeView {
 
@@ -275,65 +276,8 @@ namespace SGPlantaReciclajeView {
 		int idTipo = this->estacionSeleccionada->getTipo();
 		int idEstado = this->estacionSeleccionada->getEstado();
 
-		llenarCmbTipo(idTipo);
-		llenarCmbEstado(idEstado);
-	}
-
-	public: void llenarCmbTipo(int idTipo)
-	{	//Poblar un ComboBox con los tipos de estación
-		TipoEstacionController^ tipoController = gcnew TipoEstacionController();
-		List<TipoEstacion^>^ listaTipos = tipoController->ListarTipos();
-
-		cmbTipo->Items->Clear();
-		// Crear una lista de pares clave-valor para almacenar los elementos del ComboBox
-		List<KeyValuePair<String^, String^>>^ items = gcnew List<KeyValuePair<String^, String^>>();
-		for each (TipoEstacion ^ tipo in listaTipos) {
-			int id = tipo->getIdTipoEstacion();
-			String^ descripcion = tipo->getDescripcion();
-			// Agregar el tipo de robot a la lista de items para el ComboBox
-			items->Add(KeyValuePair<String^, String^>(id.ToString(), descripcion));
-		}
-		// Configurar el ComboBox para mostrar el nombre pero mantener el ID como valor
-		cmbTipo->DataSource = items;
-		cmbTipo->DisplayMember = "Value"; // muestra el nombre
-		cmbTipo->ValueMember = "Key";     // mantiene el ID como valor
-
-		// Seleccionar el tipo y estado correspondiente en los ComboBox
-		for (int i = 0; i < cmbTipo->Items->Count; i++) {
-			KeyValuePair<String^, String^> item = safe_cast<KeyValuePair<String^, String^>>(cmbTipo->Items[i]);
-			if (item.Key == idTipo.ToString()) {
-				cmbTipo->SelectedIndex = i;
-				break;
-			}
-		}
-	}
-
-	public: void llenarCmbEstado(int idEstado)
-	{	//Poblar un ComboBox con los estados de estación
-		EstadoOperativoController^ estadoController = gcnew EstadoOperativoController();
-		List<EstadoOperativo^>^ listaEstados = estadoController->ListarEstados();
-
-		cmbEstado->Items->Clear();
-		List<KeyValuePair<String^, String^>>^ items = gcnew List<KeyValuePair<String^, String^>>();
-		for each (EstadoOperativo ^ estado in listaEstados) {
-			int id = estado->getIdEstadoOperativo();
-			String^ descripcion = estado->getDescripcion();
-			// Agregar el estado de estación a la lista de items para el ComboBox
-			items->Add(KeyValuePair<String^, String^>(id.ToString(), descripcion));
-		}
-		// Configurar el ComboBox para mostrar el nombre pero mantener el ID como valor
-		cmbEstado->DataSource = items;
-		cmbEstado->DisplayMember = "Value"; // muestra el nombre
-		cmbEstado->ValueMember = "Key";     // mantiene el ID como valor
-		
-		// Seleccionar el tipo y estado correspondiente en los ComboBox
-		for (int i = 0; i < cmbEstado->Items->Count; i++) {
-			KeyValuePair<String^, String^> item = safe_cast<KeyValuePair<String^, String^>>(cmbEstado->Items[i]);
-			if (item.Key == idEstado.ToString()) {
-				cmbEstado->SelectedIndex = i;
-				break;
-			}
-		}
+		ComboHelper::LlenarComboTipo(this->cmbTipo, idTipo);
+		ComboHelper::LlenarComboEstado(this->cmbEstado, idEstado);
 	}
 
 	private: System::Void btnGrabar_Click(System::Object^ sender, System::EventArgs^ e) {

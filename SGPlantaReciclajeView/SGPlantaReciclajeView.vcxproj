@@ -140,12 +140,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ComboHelper.cpp" />
     <ClCompile Include="frmEditarEstacion.cpp" />
     <ClCompile Include="frmMantEstacion.cpp" />
     <ClCompile Include="frmNuevaEstacion.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ComboHelper.h" />
     <ClInclude Include="frmEditarEstacion.h">
       <FileType>CppForm</FileType>
     </ClInclude>
